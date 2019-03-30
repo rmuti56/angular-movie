@@ -47,14 +47,14 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="all-form-element-inner">
-                  <form action="#">
+                  <form [formGroup]="Form" (submit)="onSubmit()">
                     <div class="form-group-inner">
                       <div class="row">
                         <div class="col-lg-3">
                           <label class="login2 pull-right pull-right-pro">ชื่อหนัง</label>
                         </div>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" formControlName="nameMovie" />
                         </div>
                       </div>
                     </div>
@@ -64,17 +64,26 @@
                           <label class="login2 pull-right pull-right-pro">ลิ้งค์ตัวอย่างหนัง</label>
                         </div>
                         <div class="col-lg-9">
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" formControlName="linkPreview" />
                         </div>
                       </div>
                     </div>
                     <div class="form-group-inner">
                       <div class="row">
-                        <div class="col-lg-3">
-                          <label class="login2 pull-right pull-right-pro">เสียงพากษ์</label>
+                        <div class="col-lg-3 col-md-9 col-sm-9 col-xs-9">
+                          <label class="login2 pull-right pull-right-pro">
+                            เสียงพากษ์</label>
                         </div>
-                        <div class="col-lg-9">
-                          <input type="text" class="form-control" />
+                        <div class="col-lg-9 col-md-3 col-sm-3 col-xs-3">
+                          <div class="bt-df-checkbox" style="margin-right:none;">
+                            <label class="" style="float:left;"> <input class="pull-left radio-checked" type="radio"
+                                checked="" value="thai" id="optionsRadios1" name="soundTrack"
+                                formControlName="soundTrack">thai</label>
+                            <label class="" style="float:left;margin-left: 10px;margin-right: 10px;"><input
+                                class="pull-left" type="radio" value="english" id="" name="soundTrack"
+                                formControlName="soundTrack">english</label>
+
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -87,10 +96,11 @@
                         <div class="col-lg-9 col-md-3 col-sm-3 col-xs-3">
                           <div class="bt-df-checkbox" style="margin-right:none;">
                             <label class="" style="float:left;"> <input class="pull-left radio-checked" type="radio"
-                                checked="" value="option1" id="optionsRadios1" name="optionsRadios">HD</label>
+                                checked="" value="HD" id="optionsRadios1" name="resolution"
+                                formControlName="resolution">HD</label>
                             <label class="" style="float:left;margin-left: 10px;margin-right: 10px;"><input
-                                class="pull-left" type="radio" value="option2" id="optionsRadios2"
-                                name="optionsRadios">ZM</label>
+                                class="pull-left" type="radio" value="ZM" id="" name="resolution"
+                                formControlName="resolution">ZM</label>
 
                           </div>
                         </div>
@@ -103,12 +113,9 @@
                         </div>
                         <div class="col-lg-9">
                           <div class="form-select-list">
-                            <select class="form-control custom-select-value" name="account">
-                              <option>มาแรง</option>
-                              <option>หนังเอเชีย</option>
-                              <option>หนังฝรั่ง</option>
-                              <option>ยอดนิยม</option>
-
+                            <select class="form-control custom-select-value" name="account" formControlName="group">
+                              <option value="{{item}}" *ngFor="let item of groupMovie">{{item}}</option>
+                              >
                             </select>
                           </div>
                         </div>
@@ -121,23 +128,10 @@
                         </div>
                         <div class="col-lg-9">
                           <div class="form-select-list">
-                            <select class="form-control custom-select-value" name="account">
-                              <option>บู้</option>
-                              <option>ผจญภัย</option>
-                              <option>การ์ตูน</option>
-                              <option>ชีวิตจริง</option>
-                              <option>ตลก</option>
-                              <option>อาชญากรรม</option>
-                              <option>ครอบครัว</option>
-                              <option>เทพนิยาย</option>
-                              <option>ประวัติศาสตร์</option>
-                              <option>สยองขวัญ</option>
-                              <option>สืบสวนสอบสวน</option>
-                              <option>สงคราม</option>
-                              <option>โรแมนติก</option>
-                              <option>กีฬา</option>
-                              <option>โป้</option>
+                            <select class="form-control custom-select-value" name="account" formControlName="type">
+                              <option value="{{item}}" *ngFor="let item of typeMovie">{{item}}</option>
                             </select>
+
                           </div>
                         </div>
                       </div>
@@ -148,7 +142,8 @@
                           <label class="login2 pull-right pull-right-pro">เรื่องย่อ</label>
                         </div>
                         <div class="col-lg-9">
-                          <textarea name="comment" class="form-control" cols="30" rows="10"></textarea>
+                          <textarea name="comment" class="form-control" cols="30" rows="10"
+                            formControlName="summary"></textarea>
                         </div>
                       </div>
                     </div>
@@ -164,7 +159,7 @@
                                 Browse
                                 <input type="file"
                                   onchange="document.getElementById('append-small-btn').value = this.value;"
-                                  accept="image/*">
+                                  (change)="changeImage($event)" accept="image/*" formControlName="image">
                               </div>
                               <input type="text" id="append-small-btn" placeholder="ยังไม่ได้เลือกรูปภาพ">
                             </div>
@@ -187,7 +182,7 @@
                                 Browse
                                 <input type="file"
                                   onchange="document.getElementById('append-big-btn').value = this.value;"
-                                  accept="video/*">
+                                  accept="video/*" formControlName="vedio">
                               </div>
                               <input type="text" id="append-big-btn" placeholder="ยังไม่ได้เลือกหนัง">
                             </div>

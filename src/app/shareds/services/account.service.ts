@@ -17,4 +17,10 @@ export class AccountService {
       .toPromise() as Promise<any>
   }
 
+  onUpload(model: any) {
+    return this.http
+      .requestPost('api/movie/upload', model)
+      .toPromise() as Promise<any>
+  }
+
 }
