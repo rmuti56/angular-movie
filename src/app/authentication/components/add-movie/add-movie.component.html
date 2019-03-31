@@ -159,7 +159,7 @@
                                 Browse
                                 <input type="file"
                                   onchange="document.getElementById('append-small-btn').value = this.value;"
-                                  (change)="changeImage($event)" accept="image/*" formControlName="image">
+                                  (change)="changeImage($event)" accept="image/*">
                               </div>
                               <input type="text" id="append-small-btn" placeholder="ยังไม่ได้เลือกรูปภาพ">
                             </div>
@@ -182,7 +182,7 @@
                                 Browse
                                 <input type="file"
                                   onchange="document.getElementById('append-big-btn').value = this.value;"
-                                  accept="video/*" formControlName="vedio">
+                                  accept="video/*" (change)="changeVedio($event)">
                               </div>
                               <input type="text" id="append-big-btn" placeholder="ยังไม่ได้เลือกหนัง">
                             </div>
@@ -193,15 +193,17 @@
                     <div class="form-group-inner">
                       <div class="login-btn-inner">
                         <div class="row">
-                          <div class="col-lg-3"></div>
-                          <div class="col-lg-9">
-                            <div class="login-horizental cancel-wp pull-right">
-                              <button class="btn btn-sm btn-white login-button login-button-lg"
+                          <div class="login-horizental cancel-wp pull-right">
+                            <div class="col-lg-6">
+                              <button class="btn  btn-white login-button login-button-lg btn-block"
                                 type="submit">ยกเลิก</button>
-                              <button class="btn  btn-primary login-submit-cs login-button login-button-lg"
-                                type="submit">บันทึก</button>
+                            </div>
+                            <div class="col-lg-6">
+                              <button class="btn  btn-primary login-submit-cs login-button login-button-lg btn-block"
+                                type="submit" [disabled]="Form.invalid || isDisabled">บันทึก</button>
                             </div>
                           </div>
+
                         </div>
                       </div>
                     </div>

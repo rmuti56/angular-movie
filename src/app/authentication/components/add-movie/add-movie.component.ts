@@ -48,32 +48,77 @@ export class AddMovieComponent implements OnInit {
   AppURL = AppURL;
   AuthURL = AuthURL;
   Form: FormGroup;
+  isDisabled = true;
 
   onSubmit() {
     // if (this.Form.invalid) {
     //   return this.alert.someting_wrong();
     // }
-    console.log(this.Form.value)
-    this.alert.notify('ทดสอบ')
-    this.uploadImage();
+
+
+    Promise.all([this.uploadImage(), this.uploadVedio()]).then(() => {
+      this.alert.notify('อัพโหลด');
+    }).catch(e => {
+      this.alert.someting_wrong(e);
+    })
+
   }
   uploadImage() {
     return new Promise((resolve, reject) => {
-      const formData: any = new FormData();
-      for (let i = 0; i < 1; i++) {
-        formData.append('uploads[]', this.Form.value.image[i], this.Form.value.image[i]['name']);
+      try {
+        const formData: any = new FormData();
+        console.log(this.Form.value.image);
+        for (let i = 0; i < 1; i++) {
+          console.log(this.Form.value.image[i]);
+          formData.append('uploads[]', this.Form.value.image[i], this.Form.value.image[i]['name']);
+        }
+        this.account.onUpload(formData).then(result => {
+          resolve(this.Form.value.idImageUpload = result.data)
+        }).catch(e => {
+          reject(e.error)
+        })
+      } catch {
+        throw 'อัพโหลดไม่สำเร็จ';
       }
-      this.account.onUpload(formData).then(result => {
-        console.log(result.data);
-      }).catch(e => {
-        console.log(e);
-      })
+    })
+  }
+
+  uploadVedio() {
+    return new Promise((resolve, reject) => {
+      try {
+        const formData1: any = new FormData();
+        for (let i = 0; i < 1; i++) {
+          console.log(this.Form.value.vedio[i]);
+          formData1.append('uploads[]', this.Form.value.vedio[i], this.Form.value.vedio[i]['name']);
+        }
+        this.account.onUpload(formData1).then(result => {
+          resolve(this.Form.value.idVedioUpload = result.data)
+        }).catch(e => {
+          reject(e.error)
+        })
+      } catch {
+        throw 'อัพโหลดไม่สำเร็จ';
+      }
+
     })
   }
 
   changeImage(event) {
     this.Form.value.image = event.target.files;
-    console.log(this.Form.value.image);
+    if (this.Form.value.image.length !== 0 && this.Form.value.vedio.length !== 0) {
+      this.isDisabled = false;
+    } else {
+      this.isDisabled = true
+    }
+  }
+
+  changeVedio(event) {
+    this.Form.value.vedio = event.target.files;
+    if (this.Form.value.image.length !== 0 && this.Form.value.vedio.length !== 0) {
+      this.isDisabled = false;
+    } else {
+      this.isDisabled = true
+    }
   }
 
   private initialCreateFormData() {
@@ -85,8 +130,10 @@ export class AddMovieComponent implements OnInit {
       group: ['มาแรง', Validators.required],
       type: ['บู้', Validators.required],
       summary: ['', Validators.required],
-      image: ['', Validators.required],
-      vedio: ['', Validators.required],
+      image: ['',],
+      vedio: ['',],
+      idImageUpload: [''],
+      idVedioUpload: [''],
     })
   }
 }
