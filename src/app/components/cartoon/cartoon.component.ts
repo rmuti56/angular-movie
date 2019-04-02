@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shareds/services/alert.service';
+import { MovieService } from 'src/app/shareds/services/movie.service';
+import { AppURL } from 'src/app/app.url';
 
 @Component({
   selector: 'app-cartoon',
@@ -6,10 +10,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cartoon.component.css']
 })
 export class CartoonComponent implements OnInit {
+  showLoading = true;
+  constructor(
+    private alert: AlertService,
+    private movie: MovieService,
+    private router: Router
+  ) {
+    this.initailLoadMovie()
 
-  constructor() { }
+  }
 
   ngOnInit() {
   }
+  movies = '';
+  AppURL = AppURL;
 
+  onPlayMovie(item) {
+    this.router.navigate(['', AppURL.PlayMovie, item._id])
+  }
+
+  initailLoadMovie() {
+    this.movie.onSearchTypeMovie('การ์ตูน').then((result) => {
+      this.movies = result;
+      this.showLoading = false;
+    }).catch(e => {
+      return this.alert.someting_wrong('เกิดข้อผิดพลาด');
+    })
+  }
 }

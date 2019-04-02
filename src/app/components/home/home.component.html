@@ -27,314 +27,43 @@
   </div>
   <!-- Breadcome End-->
   <!-- accordion start-->
+  <app-loading *ngIf="showLoading"></app-loading>
   <div class="adminpro-accordion-area">
     <div class="container-fluid">
 
       <div class="row justify-content-center mx-auto">
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
+        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" *ngFor="let item of movies">
           <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
             <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
+              <a class="holder_wrap" (click)="(onPlayMovie(item))">
+                <img class="size-img" src="https://drive.google.com/uc?id={{item.idImageUpload}}" />
                 <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
+                  {{item.nameMovie}}
                 </div>
                 <div class="star">
-                  <b><span>10</span></b>
+                  <b><span>{{item.rating}}</span></b>
                 </div>
-                <div class="hd zm">ZM</div>
+                <div class="hd {{item.resolution}}">{{item.resolution}}</div>
               </a>
             </div>
             <div class="panel-group adminpro-custon-design" id="accordion">
               <div class="panel panel-default">
                 <div class="panel-heading accordion-head">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#{{item._id}}">
                       เรื่องย่อ...</a>
                   </h4>
                 </div>
-                <div id="collapse1" class="panel-collapse panel-ic collapse">
+                <div id="{{item._id}}" class="panel-collapse panel-ic collapse">
                   <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.
-                      Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
+                    <p>{{item.summary}}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>10</span></b>
-                </div>
-                <div class="hd zm">ZM</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion2">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>9.5</span></b>
-                </div>
-                <div class="hd hd1">HD</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion3">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion3" href="#collapse3">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>8.4</span></b>
-                </div>
-                <div class="hd zm">ZM</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion4">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion4" href="#collapse4">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse4" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>8.0</span></b>
-                </div>
-                <div class="hd hd1">HD</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion5">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion5" href="#collapse5">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse5" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>8.0</span></b>
-                </div>
-                <div class="hd hd1">HD</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion6">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion6" href="#collapse6">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse6" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>8.0</span></b>
-                </div>
-                <div class="hd hd1">HD</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion7">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion7" href="#collapse7">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse7" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" style="padding-top:30px;">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap">
-                <img class="size-img"
-                  src="https://wallpaper.thaiware.com/upload/wallpaper/2011_02/medium/4543_4275_110222130627_6w.jpg" />
-                <div class="inner_position_top">
-                  ตามล่าไอ้หน้าโจร ข้ามโลกโศกสิครับ
-                </div>
-                <div class="star">
-                  <b><span>8.0</span></b>
-                </div>
-                <div class="hd zm">ZM</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion8">
-              <div class="panel panel-default">
-                <div class="panel-heading accordion-head">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion8" href="#collapse8">
-                      Collapsible Group 1</a>
-                  </h4>
-                </div>
-                <div id="collapse8" class="panel-collapse panel-ic collapse">
-                  <div class="panel-body admin-panel-content animated bounce">
-                    <p>It was popularised in the 1960s with the release of Letraset sheets of the containing Lorem Ipsum
-                      passages, and more recently with desktop publishing software like Aldus PageMaker including
-                      versions.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua of Lorem Ipsum.</p>
-                    <p> Ut enim adminim veniam, quis nostrud exercitation ullamco laboris nisis ut aliquip ex ea commodo
-                      consequat consectetur adipisicing elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
       </div>
 

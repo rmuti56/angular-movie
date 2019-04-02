@@ -23,4 +23,10 @@ export class AccountService {
       .toPromise() as Promise<any>
   }
 
+  onAddMovie(model: any) {
+    return this.http
+      .requestPost('api/movie/addmovie', model)
+      .toPromise() as Promise<any>
+  }
+
 }

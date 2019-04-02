@@ -4,6 +4,7 @@ import { AuthURL } from '../../authentication.url';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AlertService } from 'src/app/shareds/services/alert.service';
 import { AccountService } from 'src/app/shareds/services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-movie',
@@ -22,7 +23,7 @@ export class AddMovieComponent implements OnInit {
     "เทพนิยาย",
     "ประวัติศาสตร์",
     "สยองขวัญ",
-    "สืบสอนสอบสวน",
+    "สืบสวนสอบสวน",
     "สงคราม",
     "โรแมนติก",
     "กีฬา",
@@ -38,7 +39,8 @@ export class AddMovieComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private alert: AlertService,
-    private account: AccountService
+    private account: AccountService,
+    private router: Router
   ) {
     this.initialCreateFormData();
   }
@@ -49,16 +51,25 @@ export class AddMovieComponent implements OnInit {
   AuthURL = AuthURL;
   Form: FormGroup;
   isDisabled = true;
+  showLoading: boolean;
 
   onSubmit() {
     // if (this.Form.invalid) {
     //   return this.alert.someting_wrong();
     // }
+    this.showLoading = true;
 
-
-    Promise.all([this.uploadImage(), this.uploadVedio()]).then(() => {
-      this.alert.notify('อัพโหลด');
+    Promise.all([this.uploadImage(), this.uploadVideo()]).then(() => {
+      this.account.onAddMovie(this.Form.value).then(() => {
+        this.showLoading = false;
+        this.alert.notify('เพิ่มหนังสำเร็จ')
+        this.router.navigate(['/', AppURL.Home])
+      }).catch(err => {
+        this.showLoading = false;
+        this.alert.someting_wrong(err.error)
+      })
     }).catch(e => {
+      this.showLoading = false;
       this.alert.someting_wrong(e);
     })
 
@@ -73,7 +84,7 @@ export class AddMovieComponent implements OnInit {
           formData.append('uploads[]', this.Form.value.image[i], this.Form.value.image[i]['name']);
         }
         this.account.onUpload(formData).then(result => {
-          resolve(this.Form.value.idImageUpload = result.data)
+          resolve(this.Form.value.idImageUpload = result.data.id)
         }).catch(e => {
           reject(e.error)
         })
@@ -83,16 +94,16 @@ export class AddMovieComponent implements OnInit {
     })
   }
 
-  uploadVedio() {
+  uploadVideo() {
     return new Promise((resolve, reject) => {
       try {
         const formData1: any = new FormData();
         for (let i = 0; i < 1; i++) {
-          console.log(this.Form.value.vedio[i]);
-          formData1.append('uploads[]', this.Form.value.vedio[i], this.Form.value.vedio[i]['name']);
+          console.log(this.Form.value.video[i]);
+          formData1.append('uploads[]', this.Form.value.video[i], this.Form.value.video[i]['name']);
         }
         this.account.onUpload(formData1).then(result => {
-          resolve(this.Form.value.idVedioUpload = result.data)
+          resolve(this.Form.value.idVideoUpload = result.data.id)
         }).catch(e => {
           reject(e.error)
         })
@@ -105,16 +116,16 @@ export class AddMovieComponent implements OnInit {
 
   changeImage(event) {
     this.Form.value.image = event.target.files;
-    if (this.Form.value.image.length !== 0 && this.Form.value.vedio.length !== 0) {
+    if (this.Form.value.image.length !== 0 && this.Form.value.video.length !== 0) {
       this.isDisabled = false;
     } else {
       this.isDisabled = true
     }
   }
 
-  changeVedio(event) {
-    this.Form.value.vedio = event.target.files;
-    if (this.Form.value.image.length !== 0 && this.Form.value.vedio.length !== 0) {
+  changeVideo(event) {
+    this.Form.value.video = event.target.files;
+    if (this.Form.value.image.length !== 0 && this.Form.value.video.length !== 0) {
       this.isDisabled = false;
     } else {
       this.isDisabled = true
@@ -131,9 +142,10 @@ export class AddMovieComponent implements OnInit {
       type: ['บู้', Validators.required],
       summary: ['', Validators.required],
       image: ['',],
-      vedio: ['',],
+      video: ['',],
       idImageUpload: [''],
-      idVedioUpload: [''],
+      idVideoUpload: [''],
+      rating: ['', Validators.compose([Validators.required, Validators.min(0), Validators.max(10)])]
     })
   }
 }

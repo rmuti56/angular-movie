@@ -54,6 +54,7 @@ i {
   cursor: pointer;
 }
 
+
 .holder_wrap {
   overflow: hidden;
   width: 100%;
@@ -67,6 +68,7 @@ i {
 
 /* css ซ้อนทับ ชิดขอบบน */
 .inner_position_top {
+  width: 100%;
   background: rgba(0, 0, 0, .7);
   text-align: center;
   word-wrap: break-word;
@@ -75,7 +77,7 @@ i {
   text-decoration: none;
   position: absolute;
   display: block;
-  border-radius: 2rem;
+
   /* กำหนดความสูงส่วนของเนื้อหาที่นำมาซ้อนทับ */
   /* กำหนดความกว้างของเนื้อหาที่นำมาซ้อนทับ แบบขยายเต็ม */
   bottom: 0px;
@@ -131,11 +133,11 @@ b span {
 
 }
 
-.hd1 {
+.HD {
   background-color: red;
 }
 
-.zm {
+.ZM {
   background-color: green;
 }
 
@@ -152,8 +154,8 @@ b span {
 }
 
 .lds-ellipsis {
-  margin-left: 50% !important;
-  display: inline-block;
+  margin: auto;
+  display: block;
   position: relative;
   width: 64px;
   height: 64px;

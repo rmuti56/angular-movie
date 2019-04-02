@@ -77,11 +77,11 @@
                         <div class="col-lg-9 col-md-3 col-sm-3 col-xs-3">
                           <div class="bt-df-checkbox" style="margin-right:none;">
                             <label class="" style="float:left;"> <input class="pull-left radio-checked" type="radio"
-                                checked="" value="thai" id="optionsRadios1" name="soundTrack"
-                                formControlName="soundTrack">thai</label>
+                                checked="" value="THAI" id="optionsRadios1" name="soundTrack"
+                                formControlName="soundTrack">THAI</label>
                             <label class="" style="float:left;margin-left: 10px;margin-right: 10px;"><input
-                                class="pull-left" type="radio" value="english" id="" name="soundTrack"
-                                formControlName="soundTrack">english</label>
+                                class="pull-left" type="radio" value="ENGLISH" id="" name="soundTrack"
+                                formControlName="soundTrack">ENGLISH</label>
 
                           </div>
                         </div>
@@ -121,6 +121,7 @@
                         </div>
                       </div>
                     </div>
+
                     <div class="form-group-inner">
                       <div class="row">
                         <div class="col-lg-3">
@@ -133,6 +134,17 @@
                             </select>
 
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group-inner">
+                      <div class="row">
+                        <div class="col-lg-3">
+                          <label class="login2 pull-right pull-right-pro">คะแนน</label>
+                        </div>
+                        <div class="col-lg-9">
+                          <input type="number" class="form-control" max="10" min="0" step="0.1"
+                            formControlName="rating" />
                         </div>
                       </div>
                     </div>
@@ -182,7 +194,7 @@
                                 Browse
                                 <input type="file"
                                   onchange="document.getElementById('append-big-btn').value = this.value;"
-                                  accept="video/*" (change)="changeVedio($event)">
+                                  accept="video/*" (change)="changeVideo($event)">
                               </div>
                               <input type="text" id="append-big-btn" placeholder="ยังไม่ได้เลือกหนัง">
                             </div>
@@ -207,6 +219,7 @@
                         </div>
                       </div>
                     </div>
+                    <app-loading *ngIf="showLoading"></app-loading>
                   </form>
                 </div>
               </div>

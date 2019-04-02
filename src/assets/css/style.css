@@ -4583,7 +4583,7 @@ ul.profile-contact-menu {
 .fixed-header-top {
   position: relative;
   background: #303030;
-  z-index: 9999;
+  z-index: 99999;
   width: 100%;
   top: 0;
   margin: 0 auto;

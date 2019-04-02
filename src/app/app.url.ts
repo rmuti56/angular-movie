@@ -20,5 +20,6 @@ export const AppURL = {
   Romantic: 'romantic',
   Sport: 'sprot',
   Porn: 'porn',
-  Login: 'login'
+  Login: 'login',
+  PlayMovie: 'playmovie'
 }

@@ -1,0 +1,17 @@
+.show-image {
+  height: 400px;
+  background-position: center center;
+  max-height: 100%;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  /* width: 100%; */
+  background-attachment: fixed;
+  /* max-width: 100%; */
+}
+
+
+.play-movie-size {
+  width: 100%;
+  max-width: none !important;
+  height: 500px;
+}
