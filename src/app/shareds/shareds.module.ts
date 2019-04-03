@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { AlertService } from './services/alert.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoadingComponent } from './components/loading/loading.component'
+
+
+
 @NgModule({
   declarations: [
     MenuComponent,
@@ -14,7 +17,9 @@ import { LoadingComponent } from './components/loading/loading.component'
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+
 
   ],
   exports: [

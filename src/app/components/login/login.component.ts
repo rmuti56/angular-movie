@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AlertService } from 'src/app/shareds/services/alert.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenService } from 'src/app/services/authen.service';
 import { AppURL } from 'src/app/app.url';
 import { AccountService } from 'src/app/shareds/services/account.service';
@@ -17,13 +17,18 @@ export class LoginComponent implements OnInit {
     private builder: FormBuilder,
     private router: Router,
     private authen: AuthenService,
-    private account: AccountService
+    private account: AccountService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.initialCreateFormData();
+    this.activatedRoute.params.forEach(param => {
+      this.returnURL = param.returnURL || `/${AppURL.Home}`
+    })
   }
 
   ngOnInit() {
   }
+  returnURL: string;
   AppURL = AppURL
   form: FormGroup
   showLoadingIndicator: boolean;
@@ -40,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.authen.setAuthenticated(res);
         this.showLoadingIndicator = false;
         this.alert.notify('เข้าสู่ระบบสำเร็จ');
-        this.router.navigate(['/', AppURL.Home])
+        this.router.navigateByUrl(this.returnURL);
       })
       .catch(err => {
         this.alert.someting_wrong(err.error)

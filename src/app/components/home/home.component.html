@@ -32,21 +32,22 @@
     <div class="container-fluid">
 
       <div class="row justify-content-center mx-auto">
-        <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" *ngFor="let item of movies">
-          <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
-            <div class="alert-title">
-              <a class="holder_wrap" (click)="(onPlayMovie(item))">
-                <img class="size-img" src="https://drive.google.com/uc?id={{item.idImageUpload}}" />
-                <div class="inner_position_top">
-                  {{item.nameMovie}}
-                </div>
-                <div class="star">
-                  <b><span>{{item.rating}}</span></b>
-                </div>
-                <div class="hd {{item.resolution}}">{{item.resolution}}</div>
-              </a>
-            </div>
-            <div class="panel-group adminpro-custon-design" id="accordion">
+        <div class="panel-group adminpro-custon-design" id="accordion">
+          <div class="col-lg-3 col-md-4 col-sm-6 mx-auto" *ngFor="let item of movies">
+            <div class="admin-pro-accordion-wrap mg-b-15 shadow-reset">
+              <div class="alert-title">
+                <a class="holder_wrap" (click)="(onPlayMovie(item))">
+                  <img class="size-img" src="https://drive.google.com/uc?id={{item.idImageUpload}}" />
+                  <div class="inner_position_top">
+                    {{item.nameMovie}}
+                  </div>
+                  <div class="star">
+                    <b><span>{{item.rating}}</span></b>
+                  </div>
+                  <div class="hd {{item.resolution}}">{{item.resolution}}</div>
+                </a>
+              </div>
+
               <div class="panel panel-default">
                 <div class="panel-heading accordion-head">
                   <h4 class="panel-title">
@@ -59,6 +60,11 @@
                     <p>{{item.summary}}</p>
                   </div>
                 </div>
+              </div>
+              <div class="panel panel-default" *ngIf="Auth">
+                <button class="btn btn-danger" (click)="(onDeleteMovie(item))">ลบหนัง</button>
+                <button class="btn btn pull-right" (click)="(onEditMovie(item))">แก้ไขหนัง</button>
+                <app-loading *ngIf="!item._id"></app-loading>
               </div>
             </div>
           </div>

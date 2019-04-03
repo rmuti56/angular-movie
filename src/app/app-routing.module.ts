@@ -23,6 +23,7 @@ import { RomanticComponent } from './components/romantic/romantic.component';
 import { LoginComponent } from './components/login/login.component';
 import { PornComponent } from './components/porn/porn.component';
 import { PlaymovieComponent } from './components/playmovie/playmovie.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: AppURL.Home, pathMatch: 'full' },
@@ -48,7 +49,10 @@ const routes: Routes = [
   { path: AppURL.War, component: WarComponent },
   { path: AppURL.Login, component: LoginComponent },
   { path: AppURL.PlayMovie + '/:id', component: PlaymovieComponent },
-  { path: AppURL.Auth, loadChildren: './authentication/authentication.module#AuthenticationModule' },
+  {
+    path: AppURL.Auth, loadChildren: './authentication/authentication.module#AuthenticationModule',
+    canActivate: [AuthenticationGuard]
+  },
 ];
 
 @NgModule({

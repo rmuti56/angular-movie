@@ -6,7 +6,12 @@ import { SettingComponent } from './components/setting/setting.component';
 
 const routes: Routes = [
   { path: '', redirectTo: AuthURL.AddMovie, pathMatch: 'full' },
-  { path: AuthURL.AddMovie, component: AddMovieComponent },
+  {
+    path: AuthURL.AddMovie, children: [
+      { path: '', component: AddMovieComponent },
+      { path: ':id', component: AddMovieComponent }
+    ]
+  },
   { path: AuthURL.Setting, component: SettingComponent },
 ];
 
