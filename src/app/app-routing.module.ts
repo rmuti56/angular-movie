@@ -48,7 +48,12 @@ const routes: Routes = [
   { path: AppURL.Sport, component: SportComponent },
   { path: AppURL.War, component: WarComponent },
   { path: AppURL.Login, component: LoginComponent },
-  { path: AppURL.PlayMovie + '/:id', component: PlaymovieComponent },
+  {
+    path: AppURL.PlayMovie, children: [
+      { path: '', component: PlaymovieComponent, },
+      { path: ':id', component: PlaymovieComponent }
+    ]
+  },
   {
     path: AppURL.Auth, loadChildren: './authentication/authentication.module#AuthenticationModule',
     canActivate: [AuthenticationGuard]

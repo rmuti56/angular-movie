@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http'
 import { PornComponent } from './components/porn/porn.component';
 import { PlaymovieComponent } from './components/playmovie/playmovie.component';
+import { UrlPipe } from './url.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { PlaymovieComponent } from './components/playmovie/playmovie.component';
     SportComponent,
     LoginComponent,
     PornComponent,
-    PlaymovieComponent
+    PlaymovieComponent,
+    UrlPipe
   ],
   imports: [
     BrowserModule,

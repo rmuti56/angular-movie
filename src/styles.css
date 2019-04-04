@@ -221,3 +221,7 @@ b span {
     transform: translate(19px, 0);
   }
 }
+
+.swal2-cancel {
+  margin-right: 110px !important;
+}

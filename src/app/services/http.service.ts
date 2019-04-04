@@ -10,7 +10,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  private address: string = 'http://localhost:3000/';
+  private address: string = 'https://radiant-headland-66326.herokuapp.com/';
 
   requestPost(url: string, body: any, accessToken?: string) {
     return this.http.post(`${this.address}${url}`, body, {
