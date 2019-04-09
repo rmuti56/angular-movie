@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private authen: AuthenService
   ) {
+
     this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         this.showLoadingIndicator = true;

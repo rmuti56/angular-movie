@@ -9,7 +9,7 @@ export class UrlPipe implements PipeTransform {
   }
   transform(url): any {
     if (url) {
-      return this.sanitizer.bypassSecurityTrustResourceUrl(`https://drive.google.com/file/d/${url}/preview`);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(`http://localhost:4200/playmovie/${url}`);
     }
   }
 }

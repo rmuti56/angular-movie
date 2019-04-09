@@ -4,14 +4,14 @@ import { MenuComponent } from './components/menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { AlertService } from './services/alert.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LoadingComponent } from './components/loading/loading.component'
-
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     MenuComponent,
-    LoadingComponent
+    LoadingComponent,
+
   ],
   imports: [
     CommonModule,
